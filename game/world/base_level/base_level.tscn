@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqtkatm2wdjuk"]
+
+[ext_resource type="Script" path="res://world/base_level/base_level.gd" id="1_c4xlb"]
+[ext_resource type="TileSet" uid="uid://djglcshpq81mi" path="res://resources/walls_tileset.tres" id="2_8hgcm"]
+[ext_resource type="Script" path="res://world/base_level/walls.gd" id="2_uq1c3"]
+[ext_resource type="TileSet" uid="uid://sac6nlwkbmi4" path="res://resources/decorations_tileset.tres" id="4_tok5n"]
+[ext_resource type="Script" path="res://addons/ldtk2godot4/ldtk_tilemap.gd" id="5_7nerj"]
+[ext_resource type="PackedScene" uid="uid://cd82l6xhggjen" path="res://world/backgrounds/forest_background.tscn" id="6_i7obo"]
+
+[node name="base_level" type="Node2D"]
+script = ExtResource("1_c4xlb")
+_player_detection_mask = 16
+metadata/_edit_lock_ = true
+
+[node name="walls" type="TileMap" parent="."]
+z_index = -5
+tile_set = ExtResource("2_8hgcm")
+format = 2
+script = ExtResource("2_uq1c3")
+_layers = Array[String](["walls"])
+metadata/_edit_lock_ = true
+
+[node name="decorations" type="TileMap" parent="."]
+z_index = -5
+tile_set = ExtResource("4_tok5n")
+format = 2
+script = ExtResource("5_7nerj")
+_layers = Array[String](["decorations"])
+
+[node name="auto_decorations" type="TileMap" parent="."]
+z_index = -5
+tile_set = ExtResource("4_tok5n")
+format = 2
+script = ExtResource("5_7nerj")
+_layers = Array[String](["auto_decorations"])
+
+[node name="forest_background" parent="." instance=ExtResource("6_i7obo")]

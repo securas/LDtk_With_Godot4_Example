@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://cd82l6xhggjen"]
+
+[ext_resource type="Texture2D" uid="uid://b76leqevv8pdx" path="res://assets/background_forest_sky.png" id="1_21sos"]
+[ext_resource type="Texture2D" uid="uid://dt3nea0r3swkg" path="res://assets/background_forest_clouds.png" id="2_q6mfh"]
+[ext_resource type="Texture2D" uid="uid://qu7whdpq1gho" path="res://assets/background_forest_back_hills.png" id="3_6qsp5"]
+[ext_resource type="Texture2D" uid="uid://so6gg48g01k7" path="res://assets/background_forest_hills.png" id="4_xhx3p"]
+[ext_resource type="Texture2D" uid="uid://dxp0vt8kplrdb" path="res://assets/background_forest_sea.png" id="5_xhx2p"]
+
+[node name="forest_background" type="ParallaxBackground"]
+
+[node name="sky" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(480, 0)
+metadata/_edit_lock_ = true
+
+[node name="BackgroundForestSky" type="Sprite2D" parent="sky"]
+texture = ExtResource("1_21sos")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="clouds" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.125, 0)
+motion_mirroring = Vector2(480, 0)
+metadata/_edit_lock_ = true
+
+[node name="BackgroundForestClouds" type="Sprite2D" parent="clouds"]
+texture = ExtResource("2_q6mfh")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="back_hills" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.25, 0)
+motion_mirroring = Vector2(480, 0)
+metadata/_edit_lock_ = true
+
+[node name="BackgroundForestBackHills" type="Sprite2D" parent="back_hills"]
+texture = ExtResource("3_6qsp5")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="hills" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.5, 0)
+motion_mirroring = Vector2(480, 0)
+metadata/_edit_lock_ = true
+
+[node name="BackgroundForestHills" type="Sprite2D" parent="hills"]
+texture = ExtResource("4_xhx3p")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="sea" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.5, 0)
+motion_mirroring = Vector2(480, 0)
+metadata/_edit_lock_ = true
+
+[node name="BackgroundForestSea" type="Sprite2D" parent="sea"]
+texture = ExtResource("5_xhx2p")
+centered = false

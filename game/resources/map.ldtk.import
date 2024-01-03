@@ -1,0 +1,14 @@
+[remap]
+
+importer="LDtk2Godot4"
+type="Resource"
+uid="uid://c23adbbwev2pw"
+path="res://.godot/imported/map.ldtk-56edfbcaae56ea440e53e4d514ad4bbd.res"
+
+[deps]
+
+source_file="res://resources/map.ldtk"
+dest_files=["res://.godot/imported/map.ldtk-56edfbcaae56ea440e53e4d514ad4bbd.res"]
+
+[params]
+

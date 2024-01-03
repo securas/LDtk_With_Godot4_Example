@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://tapoebh5dv47"]
+
+[ext_resource type="Script" path="res://entities/coin/coin.gd" id="1_5tg8l"]
+[ext_resource type="Texture2D" uid="uid://cmxgl1shdb5uq" path="res://assets/tileset.png" id="1_u2ll3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qftvv"]
+size = Vector2(10, 10)
+
+[sub_resource type="Animation" id="Animation_o6lwy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("coin:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(112, 16, 16, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_i4d65"]
+resource_name = "cycle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("coin:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(112, 16, 16, 16), Rect2(128, 16, 16, 16), Rect2(144, 16, 16, 16), Rect2(160, 16, 16, 16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jwr2d"]
+_data = {
+"RESET": SubResource("Animation_o6lwy"),
+"cycle": SubResource("Animation_i4d65")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gay4e"]
+size = Vector2(12, 14)
+
+[node name="coin" type="Node2D"]
+z_index = -5
+script = ExtResource("1_5tg8l")
+metadata/_edit_lock_ = true
+
+[node name="coin_collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_qftvv")
+metadata/_edit_lock_ = true
+
+[node name="coin" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_u2ll3")
+region_enabled = true
+region_rect = Rect2(112, 16, 16, 16)
+metadata/_edit_lock_ = true
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jwr2d")
+}
+autoplay = "cycle"
+
+[node name="detect_player" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+metadata/_edit_lock_ = true
+
+[node name="collision" type="CollisionShape2D" parent="detect_player"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_gay4e")
+
+[connection signal="body_entered" from="detect_player" to="." method="_on_detect_player_body_entered" flags=3]

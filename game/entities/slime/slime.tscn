@@ -1,0 +1,145 @@
+[gd_scene load_steps=12 format=3 uid="uid://bqnvsveodmguh"]
+
+[ext_resource type="Texture2D" uid="uid://cmxgl1shdb5uq" path="res://assets/tileset.png" id="1_3rs8e"]
+[ext_resource type="Script" path="res://entities/slime/slime.gd" id="1_etr8h"]
+[ext_resource type="Script" path="res://general_purpose/utils/anim.gd" id="3_5gaun"]
+[ext_resource type="Script" path="res://general_purpose/damage/deal_damage_area.gd" id="4_1sfqn"]
+[ext_resource type="Script" path="res://general_purpose/damage/rcv_damage_area.gd" id="5_6mws2"]
+
+[sub_resource type="Animation" id="Animation_ysbpd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("rotate/slime:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(176, 0, 16, 16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("rotate/slime:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vsccc"]
+resource_name = "dead"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("rotate/slime:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(160, 0, 16, 16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("rotate/slime:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.5, 0.5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6vdvg"]
+resource_name = "patrol"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("rotate/slime:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(176, 0, 16, 16), Rect2(192, 0, 16, 16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("rotate/slime:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f5oka"]
+_data = {
+"RESET": SubResource("Animation_ysbpd"),
+"dead": SubResource("Animation_vsccc"),
+"patrol": SubResource("Animation_6vdvg")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6sckj"]
+size = Vector2(6, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0ynt"]
+size = Vector2(14, 4)
+
+[node name="slime" type="Node2D"]
+z_index = -1
+script = ExtResource("1_etr8h")
+
+[node name="rotate" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="slime" type="Sprite2D" parent="rotate"]
+texture = ExtResource("1_3rs8e")
+offset = Vector2(0, -7)
+region_enabled = true
+region_rect = Rect2(176, 0, 16, 16)
+metadata/_edit_lock_ = true
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f5oka")
+}
+script = ExtResource("3_5gaun")
+
+[node name="DealDamageArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("4_1sfqn")
+metadata/_edit_lock_ = true
+
+[node name="damage_collision" type="CollisionShape2D" parent="DealDamageArea"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_6sckj")
+metadata/_edit_lock_ = true
+
+[node name="RcvDamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1024
+script = ExtResource("5_6mws2")
+
+[node name="rcv_damage_collision" type="CollisionShape2D" parent="RcvDamageArea"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_x0ynt")

@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbgqrdk7xw16k"]
+
+[ext_resource type="Script" path="res://world/world.gd" id="1_03fup"]
+[ext_resource type="Resource" uid="uid://c23adbbwev2pw" path="res://resources/map.ldtk" id="2_c5j0b"]
+[ext_resource type="Script" path="res://world/map_images.gd" id="2_wbp3t"]
+[ext_resource type="PackedScene" uid="uid://bc8ap3kuleqvd" path="res://entities/player/player.tscn" id="4_a3mf8"]
+[ext_resource type="Script" path="res://general_purpose/fade_layer/fade_layer.gd" id="5_1kiee"]
+[ext_resource type="Script" path="res://general_purpose/shake_camera/shake_camera.gd" id="5_a54sp"]
+
+[node name="world" type="Node2D"]
+script = ExtResource("1_03fup")
+map = ExtResource("2_c5j0b")
+base_level_scene = "res://world/base_level/base_level.tscn"
+metadata/_edit_lock_ = true
+
+[node name="map_images" type="Node2D" parent="."]
+script = ExtResource("2_wbp3t")
+map = ExtResource("2_c5j0b")
+metadata/_edit_lock_ = true
+
+[node name="player" parent="." instance=ExtResource("4_a3mf8")]
+position = Vector2(40, 208)
+
+[node name="camera" type="Camera2D" parent="player"]
+script = ExtResource("5_a54sp")
+metadata/_edit_lock_ = true
+
+[node name="fade_layer" type="CanvasLayer" parent="."]
+script = ExtResource("5_1kiee")
