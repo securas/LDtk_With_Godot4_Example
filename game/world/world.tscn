@@ -19,7 +19,7 @@ map = ExtResource("2_c5j0b")
 metadata/_edit_lock_ = true
 
 [node name="player" parent="." instance=ExtResource("4_a3mf8")]
-position = Vector2(40, 208)
+position = Vector2(2128, 256)
 
 [node name="camera" type="Camera2D" parent="player"]
 script = ExtResource("5_a54sp")
